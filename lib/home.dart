@@ -99,123 +99,124 @@ class _HomeState extends State<Home> {
   Container newCart1(Size size, String num, String title, String description, String star, int id) {
     int i = 0;
     for(i; i.toString() != star; i++);
-    return Container(
-      child: Row(
-        children: [
-          Container(
-              width: size.width * .65,
+    return
+      Container(
+        child: Row(
+          children: [
+            Container(
+                width: size.width * .65,
+                height: size.height * .15,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20),
+                ),
+
+                child: Column(
+                  children: [
+                    SizedBox(height: 9,),
+                    Row(
+                      children: [
+                        SizedBox(width: 30,),
+                        Expanded(child: Text(num, style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: con.F3),), flex: 10,),
+                        Expanded(child: Icon(Icons.energy_savings_leaf, color: con.effects,), flex: 1,)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 30,),
+                        Expanded(child: Text(title, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400, color: Colors.black),))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 30,),
+                        Expanded(child: Text(description, style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.grey),))
+                      ],
+                    ),
+                    Row(
+                        children: [
+                          SizedBox(width: 310,),
+                          Expanded(child: Icon(Icons.star, color: i >= 1 ? Colors.yellow : Colors.grey,)),
+                          Expanded(child: Icon(Icons.star, color: i >= 2 ? Colors.yellow : Colors.grey,)),
+                          Expanded(child: Icon(Icons.star, color: i >= 3 ? Colors.yellow : Colors.grey,)),
+                          Expanded(child: Icon(Icons.star, color: i >= 4 ? Colors.yellow : Colors.grey,)),
+                          Expanded(child: Icon(Icons.star, color: i == 5 ? Colors.yellow : Colors.grey,)),
+                          SizedBox(width: 20,)]
+                    ),
+                  ],
+                )
+            ),
+            SizedBox(width: 20,),
+            Container(
+              width: size.width * .23,
               height: size.height * .15,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(20),
               ),
-
               child: Column(
                 children: [
-                  SizedBox(height: 9,),
-                  Row(
-                    children: [
-                      SizedBox(width: 30,),
-                      Expanded(child: Text(num, style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: con.F3),), flex: 10,),
-                      Expanded(child: Icon(Icons.energy_savings_leaf, color: con.effects,), flex: 1,)
-                    ],
+                  SizedBox(height: 15,),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const More_Info()));
+                      });
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF42A28C),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        height: size.height * .05,
+                        width: size.width * .21,
+                        child: Padding(padding: EdgeInsets.only(left: 28.0),
+                          child: Row(children: [Icon(Icons.edit, color: Colors.white,), Text(" Ver mas", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),)],),)
+
+                    ),
                   ),
-                  Row(
-                    children: [
-                      SizedBox(width: 30,),
-                      Expanded(child: Text(title, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400, color: Colors.black),))
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 30,),
-                      Expanded(child: Text(description, style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.grey),))
-                    ],
-                  ),
-                  Row(
-                      children: [
-                        SizedBox(width: 310,),
-                        Expanded(child: Icon(Icons.star, color: i >= 1 ? Colors.yellow : Colors.grey,)),
-                        Expanded(child: Icon(Icons.star, color: i >= 2 ? Colors.yellow : Colors.grey,)),
-                        Expanded(child: Icon(Icons.star, color: i >= 3 ? Colors.yellow : Colors.grey,)),
-                        Expanded(child: Icon(Icons.star, color: i >= 4 ? Colors.yellow : Colors.grey,)),
-                        Expanded(child: Icon(Icons.star, color: i == 5 ? Colors.yellow : Colors.grey,)),
-                        SizedBox(width: 20,)]
-                  ),
+                  SizedBox(height: 15,),
+                  InkWell(
+                    onTap: (){
+                      setState(() {
+
+                        var snackdemo = SnackBar(
+                          content: Text('El dato $num ha sido eliminado'),
+                          backgroundColor: con.bottons,
+                          elevation: 10,
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.all(5),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackdemo);
+                        if(num != '23')
+                        {
+                          lista.removeAt(id);
+                        }
+
+                      });
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF42A28C),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        height: size.height * .05,
+                        width: size.width * .21,
+                        child: Padding(padding: EdgeInsets.only(left: 28.0),
+                          child: Row(children: [Icon(Icons.delete, color: Colors.white,), Text(" Borrar", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),)],),)
+
+                    ),
+                  )
                 ],
-              )
-          ),
-          SizedBox(width: 20,),
-          Container(
-            width: size.width * .23,
-            height: size.height * .15,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: 15,),
-                InkWell(
-                  onTap: (){
-                    setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const More_Info()));
-                    });
-                  },
-                  child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF42A28C),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      height: size.height * .05,
-                      width: size.width * .21,
-                      child: Padding(padding: EdgeInsets.only(left: 28.0),
-                        child: Row(children: [Icon(Icons.edit, color: Colors.white,), Text(" Ver mas", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),)],),)
-
-                  ),
-                ),
-                SizedBox(height: 15,),
-                InkWell(
-                  onTap: (){
-                    setState(() {
-
-                      var snackdemo = SnackBar(
-                        content: Text('El dato $num ha sido eliminado'),
-                        backgroundColor: con.bottons,
-                        elevation: 10,
-                        behavior: SnackBarBehavior.floating,
-                        margin: EdgeInsets.all(5),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackdemo);
-                      if(num != '23')
-                      {
-                        lista.removeAt(id);
-                      }
-
-                    });
-                  },
-                  child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF42A28C),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      height: size.height * .05,
-                      width: size.width * .21,
-                      child: Padding(padding: EdgeInsets.only(left: 28.0),
-                        child: Row(children: [Icon(Icons.delete, color: Colors.white,), Text(" Borrar", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),)],),)
-
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+              ),
+            )
+          ],
+        ),
+      );
   }
 
   Container Title(Size size) {
@@ -257,48 +258,56 @@ class NewCart1 extends StatelessWidget {
   Widget build(BuildContext context) {
     int i = 0;
     for(i; i.toString() != star; i++);
-    return Container(
-        width: size.width * .95,
-        height: size.height * .15,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20),
-        ),
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const More_Info()));
+      },
+      child: Container(
+          width: size.width * .95,
+          height: size.height * .15,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20),
+          ),
 
-        child: Column(
-          children: [
-            SizedBox(height: 9,),
-            Row(
-              children: [
-                SizedBox(width: 30,),
-                Expanded(child: Text(num, style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: con.F3),), flex: 10,),
-                Expanded(child: Icon(Icons.energy_savings_leaf, color: con.effects,), flex: 1,)
-              ],
-            ),
-            Row(
-              children: [
-                SizedBox(width: 30,),
-                Expanded(child: Text(title, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400, color: Colors.black),))
-              ],
-            ),
-            Row(
-              children: [
-                SizedBox(width: 30,),
-                Expanded(child: Text(description, style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.grey),))
-              ],
-            ),
-            Row(
+          child: Column(
+            children: [
+              SizedBox(height: 9,),
+              Row(
                 children: [
-                  SizedBox(width: 530,),
-                  Expanded(child: Icon(Icons.star, color: i >= 1 ? Colors.yellow : Colors.grey,)),
-                  Expanded(child: Icon(Icons.star, color: i >= 2 ? Colors.yellow : Colors.grey,)),
-                  Expanded(child: Icon(Icons.star, color: i >= 3 ? Colors.yellow : Colors.grey,)),
-                  Expanded(child: Icon(Icons.star, color: i >= 4 ? Colors.yellow : Colors.grey,)),
-                  Expanded(child: Icon(Icons.star, color: i == 5 ? Colors.yellow : Colors.grey,)),
-                  SizedBox(width: 20,)]
-            ),
-          ],
-        )
+                  SizedBox(width: 30,),
+                  Expanded(child: Text(num, style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: con.F3),), flex: 10,),
+                  Expanded(child: Icon(Icons.energy_savings_leaf, color: con.effects,), flex: 1,)
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 30,),
+                  Expanded(child: Text(title, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400, color: Colors.black),))
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 30,),
+                  Expanded(child: Text(description, style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.grey),))
+                ],
+              ),
+              Row(
+                  children: [
+                    SizedBox(width: 530,),
+                    Expanded(child: Icon(Icons.star, color: i >= 1 ? Colors.yellow : Colors.grey,)),
+                    Expanded(child: Icon(Icons.star, color: i >= 2 ? Colors.yellow : Colors.grey,)),
+                    Expanded(child: Icon(Icons.star, color: i >= 3 ? Colors.yellow : Colors.grey,)),
+                    Expanded(child: Icon(Icons.star, color: i >= 4 ? Colors.yellow : Colors.grey,)),
+                    Expanded(child: Icon(Icons.star, color: i == 5 ? Colors.yellow : Colors.grey,)),
+                    SizedBox(width: 20,)]
+              ),
+            ],
+          )
+      ),
     );
+
   }
 }
